@@ -73,7 +73,7 @@ class RegisterController extends Controller
         ]);
 
         if (isset($data['background']))
-            $user->home()->create([
+            $user->homes()->create([
                 'background' => $backgroundPath 
             ]);
         else

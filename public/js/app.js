@@ -1715,11 +1715,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     changeColor: function changeColor() {
+      var _this = this;
+
       var colors = [['bg-primary', ''], ['bg-secondary', ''], ['bg-success', ''], ['bg-danger', ''], ['bg-warning', 'text-dark'], ['bg-info', ''], ['bg-light', 'text-dark'], ['bg-dark', '']];
       var i = 0;
 
       for (i; i < colors.length; i++) {
-        if (colors[i][0] == this.item_color) {
+        if (colors[i][0] == this.status) {
           i = (i + 1) % 8;
           break;
         }
@@ -1734,7 +1736,20 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         console.log(response.data);
-        bus.$emit('test', 'hello'); // window.location = '/home';
+        var items = document.getElementsByClassName('colored');
+        var j = 0;
+
+        for (j; j < items.length; j++) {
+          items[j].classList.replace(_this.status, colors[i][0]);
+
+          if (colors[i][0] == "bg-warning" || colors[i][0] == "bg-light") {
+            items[j].classList.remove('text-white');
+          } else {
+            items[j].classList.add('text-white');
+          }
+        }
+
+        _this.status = colors[i][0]; // window.location = '/home';
       });
     }
   }
@@ -49210,7 +49225,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-var bus = new Vue();
 Vue.component('color-button', __webpack_require__(/*! ./components/ColorButtonComponent.vue */ "./resources/js/components/ColorButtonComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to

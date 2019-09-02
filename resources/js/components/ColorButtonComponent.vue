@@ -35,12 +35,12 @@
 
                 var i = 0;
                 for (i; i < colors.length; i++){
-                    if (colors[i][0] == this.item_color) {
+                    if (colors[i][0] == this.status) {
                         i = (i+1) % 8;
                         break;
                     }
                 }
-                
+
                 axios({
                     method: 'post',
                     url: '/home/' + this.home,
@@ -51,8 +51,19 @@
                 })
                 .then(response => {
                     console.log(response.data);
-                    // bus.$emit('test', 'hello');
-                    window.location = '/home';
+                    var items = document.getElementsByClassName('colored');
+                    var j = 0;
+                    for (j; j < items.length; j++)
+                    {
+                        items[j].classList.replace(this.status, colors[i][0]);
+                        if (colors[i][0] == "bg-warning" || colors[i][0] == "bg-light") {
+                            items[j].classList.remove('text-white');
+                        } else {
+                            items[j].classList.add('text-white');
+                        }
+                    }
+                    this.status = colors[i][0];
+                    // window.location = '/home';
                 });
             }
         },

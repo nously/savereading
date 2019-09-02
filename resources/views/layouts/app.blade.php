@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="background: url('/storage/{{ $user->home->background ?? '' }}'); background-size: 100%;">
+<body style="background: url('/storage/{{ $home->background ?? '' }}'); background-size: 100%;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

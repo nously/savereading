@@ -15,7 +15,8 @@ class HomesController extends Controller
     {
         //retrieve files
         $user = auth()->user();
-        return view('home', compact('user'));
+        $home = $user->homes()->first();
+        return view('home', compact('user', 'home'));
     }
 
     public function update($home)
@@ -24,7 +25,7 @@ class HomesController extends Controller
             'item_color' => ''
         ]);
         
-        auth()->user()->home()->update($data);
+        auth()->user()->homes()->update($data);
         return;
     }
 }

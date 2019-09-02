@@ -37,9 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function home() 
+    public function homes()
     {
-        return $this->hasOne(Home::class);
+        return $this->hasMany(Home::class);
     }
     
     public function files()
