@@ -8,12 +8,16 @@ class FilesController extends Controller
 {
     public function store() 
     {
-        $file = request()->validate([
+        $data = request()->validate([
             'title' => '',
             'url' => ['required', 'url'],
+            'home' => 'integer'
         ]);
-        
-        auth()->user()->files()->create($file);
+
+        $home = auth()->user()->homes()->whereId($data['home'])->first();
+
+        unset($data['home']);
+        $home->files()->create($data);
 
         return redirect('/home');
     }

@@ -52,7 +52,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'background' => ['image']
+            'background' => ['image'],
+            'home_name' => ['required', 'string'],
+            'caption' => ['required', 'string'],
+            'item_color' => ['string'],
         ]);
     }
 
@@ -74,10 +77,16 @@ class RegisterController extends Controller
 
         if (isset($data['background']))
             $user->homes()->create([
-                'background' => $backgroundPath 
+                'background' => $backgroundPath,
+                'name' => $data['home_name'],
+                'caption' => $data['caption'],
+                'item_color' => $data['item_color']
             ]);
         else
-            $user->home()->create();
+            $user->homes()->create([
+                'name' => $data['home_name'],
+                'caption' => $data['caption'],
+            ]);
 
         return $user;
     }

@@ -18,6 +18,8 @@ class CreateHomesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->text('background')->default('backgrounds/default.jpg');
             $table->string('item_color')->default('bg-light');
+            $table->string('name');
+            $table->string('caption');
             $table->timestamps();
         });
     }
